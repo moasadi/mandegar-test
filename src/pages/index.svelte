@@ -7,10 +7,12 @@
     let isChecked = false;
     let search = "";
     let selectedAll = false;
+    let indeterminate = false;
+	
     onMount(() => {
         users = JSON.parse(localStorage.getItem("users"));
         if (users) {
-            sortUsers();
+          
             findChecked();
         } else {
             users = [];
@@ -20,8 +22,8 @@
         let data = e.detail;
         users[data.index].checked = data.userData.checked;
         localStorage.setItem("users", JSON.stringify(users));
-        sortUsers();
         findChecked();
+      
     }
     function sortUsers() {
         users.sort(function (a, b) {
@@ -33,9 +35,11 @@
         const found = users.find((e) => e.checked == true);
         if (found) {
             isChecked = true;
+            indeterminate=true;
         } else {
             isChecked = false;
         }
+
     }
     function removeItems() {
         users = JSON.parse(localStorage.getItem("users"));
@@ -58,12 +62,21 @@
         users.forEach(item=>item.checked=selectedAll)
         users=users;
         localStorage.setItem("users", JSON.stringify(users));
+        findChecked();
+        indeterminate=false;
 
     }
     function searchChange(){
+        if(search.length<=0){
+            users = JSON.parse(localStorage.getItem("users"));
+
+            return 0;
+        }
         users = JSON.parse(localStorage.getItem("users"));
 
-         users= users.filter(user => user.name.includes(search))
+         sortUsers();
+
+         users= users.filter(user => user.checked==true ||user.name.includes(search)||user.lastname.includes(search)||user.birthDate.includes(search)|| user.idno.toString().includes(search))
 
     }
 </script>
@@ -89,6 +102,7 @@
             {/if}
             <input
                 type="checkbox"
+                bind:indeterminate
                 bind:checked={selectedAll}
                 on:change={selectAndDeselectAll}
             />

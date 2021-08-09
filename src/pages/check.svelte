@@ -4,7 +4,7 @@
     const navigate = useNavigate();
 
     import { Link } from "svelte-navigator";
-    import { user,indexUser } from "../stores";
+    import { user, indexUser } from "../stores";
     let userData = {};
     let editing = {
         name: false,
@@ -23,9 +23,9 @@
         }
     });
     function editUser() {
-        let users=JSON.parse(localStorage.getItem('users'))
-        users[$indexUser]=userData;
-        localStorage.setItem('users',JSON.stringify(users))
+        let users = JSON.parse(localStorage.getItem("users"));
+        users[$indexUser] = userData;
+        localStorage.setItem("users", JSON.stringify(users));
         navigate("/", { replace: true });
     }
 </script>
@@ -40,19 +40,21 @@
                     class="text-box"
                     bind:value={userData.name}
                 />
-                <img
-                    src="icon/save.svg"
-                    on:click={() => editable("name", false)}
-                    alt="clear"
-                />
             {:else}
                 <span class="text-2">{userData.name}</span>
+            {/if}
+            <div class="row">
                 <img
                     src="icon/delete.svg"
                     on:click={() => editable("name", true)}
                     alt="clear"
                 />
-            {/if}
+                <img
+                    src="icon/save.svg"
+                    on:click={() => editable("name", false)}
+                    alt="clear"
+                />
+            </div>
         </div>
         <div class="row space-between align-center">
             <span class="text-1">Family Name:</span>
@@ -62,19 +64,21 @@
                     class="text-box"
                     bind:value={userData.lastname}
                 />
-                <img
-                    src="icon/save.svg"
-                    on:click={() => editable("lastname", false)}
-                    alt="clear"
-                />
             {:else}
                 <span class="text-2">{userData.lastname}</span>
+            {/if}
+            <div class="row">
                 <img
                     src="icon/delete.svg"
                     on:click={() => editable("lastname", true)}
                     alt="clear"
                 />
-            {/if}
+                <img
+                    src="icon/save.svg"
+                    on:click={() => editable("lastname", false)}
+                    alt="clear"
+                />
+            </div>
             <!-- <input type="text" class="text-box" bind:value={$user.lastname} /> -->
         </div>
         <div class="row space-between align-center">
@@ -85,19 +89,21 @@
                     class="text-box"
                     bind:value={userData.idno}
                 />
-                <img
-                    src="icon/save.svg"
-                    on:click={() => editable("idno", false)}
-                    alt="clear"
-                />
             {:else}
                 <span class="text-2">{userData.idno}</span>
+            {/if}
+            <div class="row">
                 <img
                     src="icon/delete.svg"
                     on:click={() => editable("idno", true)}
                     alt="clear"
                 />
-            {/if}
+                <img
+                    src="icon/save.svg"
+                    on:click={() => editable("idno", false)}
+                    alt="clear"
+                />
+            </div>
             <!-- <input type="text" class="text-box" bind:value={$user.idno} /> -->
         </div>
         <div class="row space-between align-center">
@@ -108,19 +114,21 @@
                     class="text-box"
                     bind:value={userData.birthDate}
                 />
-                <img
-                    src="icon/save.svg"
-                    on:click={() => editable("birthDate", false)}
-                    alt="clear"
-                />
             {:else}
                 <span class="text-2">{userData.birthDate}</span>
+            {/if}
+            <div class="row">
                 <img
                     src="icon/delete.svg"
                     on:click={() => editable("birthDate", true)}
                     alt="clear"
                 />
-            {/if}
+                <img
+                    src="icon/save.svg"
+                    on:click={() => editable("birthDate", false)}
+                    alt="clear"
+                />
+            </div>
             <!-- <input type="text" class="text-box" bind:value={$user.birthDate} /> -->
         </div>
         <div class="row space-between align-center">
@@ -131,25 +139,28 @@
                     class="text-box"
                     bind:value={userData.address}
                 />
-                <img
-                    src="icon/save.svg"
-                    on:click={() => editable("address", false)}
-                    alt="clear"
-                />
             {:else}
                 <span class="text-2">{userData.address}</span>
+            {/if}
+            <div class="row">
                 <img
                     src="icon/delete.svg"
                     on:click={() => editable("address", true)}
                     alt="clear"
                 />
-            {/if}
+                <img
+                    src="icon/save.svg"
+                    on:click={() => editable("address", false)}
+                    alt="clear"
+                />
+            </div>
+
             <!-- <input type="text" class="text-box" bind:value={$user.address} /> -->
         </div>
         <div class="row">
             <span class="text-1">Profile Pic:</span>
             <div class="upload-card">
-                <img src="/icon/camera.svg" alt="upload" />
+                <img class="avatar" src={userData.image} alt="upload" />
             </div>
         </div>
         <div class="row justify-end">
@@ -204,5 +215,4 @@
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
         border-radius: 0px 0px 5px 5px;
     }
-
 </style>

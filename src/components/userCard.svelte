@@ -1,6 +1,8 @@
 <script>
     import { createEventDispatcher } from "svelte";
     import { useNavigate } from "svelte-navigator";
+
+
     import { user,indexUser } from "../stores";
     const navigate = useNavigate();
 
@@ -31,7 +33,7 @@
             </div>
             <div class="row">
                 <img
-                    src="image/profile_user.jpg"
+                    src="{userData.image}"
                     class="personal-image"
                     alt="personal"
                 />
